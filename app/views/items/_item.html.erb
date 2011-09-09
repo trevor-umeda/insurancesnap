@@ -1,0 +1,7 @@
+<tr>
+  <td class = "item_name"> <%= link_to item.name, item_path(item) %>  </td>
+  <td><%= link_to "Edit", edit_item_path(item) %> </td>
+  <td><%= link_to 'Destroy', item_path(item.id),
+  :confirm => 'Are you sure?',
+  :method => :delete %>  </td>
+</tr>

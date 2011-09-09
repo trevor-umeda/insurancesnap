@@ -1,0 +1,12 @@
+<% if user_signed_in? %>
+<h1>Snapshots</h1>
+<p><%= current_user.email %></p>
+
+    <% @user_snapshots.each do |item| %>
+            <div id = "snapshot"><%= item.title %> </br>
+            <%= link_to image_tag(item.photo.url), snapshot_path(item) %>  </br>
+            <%= button_to "Delete", item, :method => :delete, :confirm => "are you sure?" %>   </div>
+        <% end %>
+ <% else %>
+ <h1>Please Sign in</h1>
+<% end %>

@@ -1,0 +1,8 @@
+<div id = "item_info">
+  <%=  image_tag @item.photo.url(:Large) %> </br>
+Name: <%= @item.name %> </br>
+Price: <%= @item.price %> </br>
+Description: <%= @item.description %> </br>
+</div>
+
+<%= link_to "Back to \"" + @snapshot.title + "\" Snapshot", snapshot_path(@item.snapshot_id) %>

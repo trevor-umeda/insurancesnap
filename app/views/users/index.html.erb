@@ -1,0 +1,15 @@
+<% if user_signed_in? %>
+<h1>User: <%= @current_user.email %>: Snapshot upload</h1>
+
+
+    <% if flash[:success] %>
+        <%= flash[:success] %>
+        <% end %>
+ <%= render 'shared/snapshot_form'  %>
+
+
+
+<% else %>
+<p> Please sign in or sign up!</p>
+
+<% end %>

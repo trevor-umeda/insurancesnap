@@ -1,0 +1,13 @@
+<div id = "snapshot_info">
+<%= image_tag @snapshot.photo.url %> </br>
+
+
+<%= link_to "Add New Item", new_item_url(:id => @snapshot.id) %>
+</br>
+<table class = "items">
+     <%= render(@snapshot.items) %>
+</table>
+
+</br>
+</div>
+<%= link_to "Back to Snapshot List", user_path(@snapshot.user_id) %>
