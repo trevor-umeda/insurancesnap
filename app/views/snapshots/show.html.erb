@@ -1,12 +1,10 @@
+
 <div id = "snapshot_info">
-<%= image_tag @snapshot.photo.url %> </br>
+<h1>Enter New Item Info</h1>
+   <%= render "shared/item_form" %>
 
-
-<%= link_to "Add New Item", new_item_url(:id => @snapshot.id) %>
 </br>
-<table class = "items">
-     <%= render(@snapshot.items) %>
-</table>
+
 
 </br>
 </div>

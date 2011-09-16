@@ -1,11 +1,12 @@
 class Item < ActiveRecord::Base
-  belongs_to :users
   belongs_to :snapshots
+  belongs_to :users
+
   validates :name, :presence => true
   validates :description, :presence => true
   validates :price, :presence => true,
                     :numericality => {:greater_than_or_equal_to => 0.01}
-  has_attached_file :photo, :styles => {:small => "100x100#", :large => "300x300>"},
+  has_attached_file :photo, :styles => {:small => "50x50#", :large => "300x300>"},
                       :processors => [:cropper],
                       :url => "/assets/items/:id/:style/:basename.:extension",
                       :path => ":rails_root/public/assets/items/:id/:style/:basename.:extension"
@@ -22,6 +23,14 @@ class Item < ActiveRecord::Base
   def photo_geometry(style = :original)
     @geometry ||= {}
     @geometry[style] ||= Paperclip::Geometry.from_file(photo.path(style))
+  end
+
+  def self.search(search)
+    if search
+      find(:all, :conditions => ['name LIKE ?', "%#{search}%"])
+    else
+      find(:all)
+  end
   end
   private
 

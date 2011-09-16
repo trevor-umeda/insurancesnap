@@ -1,8 +1,13 @@
 <div id = "item_info">
   <%=  image_tag @item.photo.url(:Large) %> </br>
 Name: <%= @item.name %> </br>
-Price: <%= @item.price %> </br>
+
 Description: <%= @item.description %> </br>
+  Price: <%= number_to_currency(@item.price) %> </br>
 </div>
+<%= link_to "Edit", edit_item_path(@item) %>
+  <%= link_to 'Destroy', item_path(@item.id),
+  :confirm => 'Are you sure?',
+  :method => :delete %>     </br>
 
 <%= link_to "Back to \"" + @snapshot.title + "\" Snapshot", snapshot_path(@item.snapshot_id) %>

@@ -4,7 +4,7 @@
   <title>Insurance</title>
   <%= stylesheet_link_tag :all %>
 
-  <%= javascript_include_tag 'jquery-1.6.3.min' %>
+  <%= javascript_include_tag 'jquery-1.6.3.min', 'application' %>
   <%= javascript_include_tag "rails" %>
   <%= csrf_meta_tag %>
   <%= yield(:head) %>
@@ -15,15 +15,23 @@
 </div>
 <div id = "columns">
     <div id = "side">
-       <p> hello</p>
+      <% if @snapshot && @snapshot.title %>
+       <h3> List of <%= @snapshot.title %>'s Photos</h3>
 
+          <div id = "item_list">
+       <%= render @snapshot.items %>
+          </div>
+
+      <% end %>
     </div>
    <div id = "rside">
+     <h3> Options: </h3>
       <%= render 'devise/menu/registration_items' %>  </br>
      <%= render 'devise/menu/login_items' %>
      <% if user_signed_in? %>
       <%= link_to "Snapshots" , user_path(current_user) %> </br>
      <%= link_to "Add Snapshots", root_path%>
+     <%= link_to "Inventory", :item_root %>
          <% end %>
   </div>
   <div id = "main">
@@ -31,8 +39,8 @@
 <p class="alert"><%= alert %></p>
 <ul class="hmenu">
 
-
 </ul>
+
 <%= yield %>
 <%= debug(params) if Rails.env.development? %>
   </div>

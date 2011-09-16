@@ -1,3 +1,10 @@
+h3 {
+ color: #bfb;
+padding-right: 1em;
+
+ text-align:center;
+}
+
 #banner {
 background: #9c9;
 padding-top: 20px;
@@ -16,10 +23,10 @@ background: #141;
 
 #main {
 margin-left: 15em;
-    margin-right: 10em;
-padding-top: 4ex;
+margin-right: 10em;
+padding-top: 4em;
 padding-left: 2em;
-    padding-right: 2em;
+padding-right: 2em;
 background: white;
 }
 #side {
@@ -27,7 +34,7 @@ float: left;
 padding-top: 1em;
 padding-left: 1em;
 padding-bottom: 1em;
-width: 4em;
+width: 14em;
 background: #141;
 }
 #rside {
@@ -53,6 +60,8 @@ font-size: small;
 }
 #footer {
     text-align: center;
+    border-top-style: dotted;
+    border-top-width: 1px;
 }
 
 #snapshot {
@@ -96,10 +105,37 @@ margin: 2em;
 }
 table.items td
 {
-    border-top: 1px solid #ccc;
+    border-bottom: 1px solid #ccc;
 
 }
-table.items td.item_name {
-  vertical-align: top;
-  padding-right: 14em;
+table.items td.item_tag {
+  vertical-align: center;
+  padding-right: 8em;
+}
+table.items td.item_photo {
+    vertical-align: top;
+}
+
+table.items td.item_delete {
+    margin-left: 6em;
+}
+
+#item {
+    padding-top: 10px;
+    padding-bottom: 5px;
+    border-bottom-style: dashed;
+    border-bottom-width: thin;
+    border-bottom-color: white;
+
+}
+
+#item_pic {
+    padding-right: 5px;
+
+
+}
+
+#item_del {
+    padding-right: 1em;
+    text-align: right;
 }

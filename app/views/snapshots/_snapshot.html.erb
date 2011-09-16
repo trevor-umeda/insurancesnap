@@ -1,0 +1,4 @@
+ <div id = "snapshot"><%= snapshot.title %> </br>
+  <%= link_to image_tag(snapshot.photo.url), snapshot_path(snapshot) %>  </br>
+  <%= button_to "Delete", snapshot, :method => :delete, :confirm => "are you sure?", :remote => true %>
+ </div>

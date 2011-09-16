@@ -4,7 +4,7 @@ class User < ActiveRecord::Base
   devise :database_authenticatable, :registerable,
          :recoverable, :trackable, :validatable
 
-   has_many :items
+   has_many :items, :through => :snapshots
   has_many :snapshots
   # Setup accessible (or protected) attributes for your model
   attr_accessible :email, :password, :password_confirmation, :remember_me

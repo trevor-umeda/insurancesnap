@@ -1,3 +1,22 @@
-<%= @items.each do |item| %>
-     <%= item.name %>
+<% form_tag items_path, :method => 'get' do %>
+  <p>
+    <%= text_field_tag :search, params[:search] %>
+    <%= submit_tag "Search", :name => nil %>
+  </p>
 <% end %>
+
+
+    <table class = "items">
+      <tr>
+        <td class = "item_photo"> Photo</td>
+        <td>Name</td>
+        <td>Price</td>
+      </tr>
+    <% @items.each do |item| %>
+          <tr>
+            <td class = "item_photo"><%= link_to image_tag(item.photo.url(:small)), item_path(item) %></td>
+          <td class = "item_tag"><%= link_to item.name, item_path(item) %></td>
+            <td><%= number_to_currency item.price %></td>
+          </tr>
+    <% end %>
+    </table>

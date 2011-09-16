@@ -1,9 +1,16 @@
 class ItemsController < ApplicationController
+  before_filter :authenticate
+  include ApplicationHelper
   def index
-    @items = Item.all
+    if params[:search]
+      @items = Item.find_all_by_user_id(current_user.id, :conditions => ['name LIKE ?', "%#{params[:search]}%"])
+    else
+      @items = current_user.items
+    end
   end
   def new
      @item = Item.new(:snapshot_id => params[:id])
+     @item.photo = Snapshot.find(params[:id]).photo
 
 
   end
@@ -21,26 +28,36 @@ class ItemsController < ApplicationController
   def destroy
     @item = Item.find(params[:id])
     @id = @item.snapshot_id
+    @snapshot = Snapshot.find(@item.snapshot_id)
       Item.find(params[:id]).destroy
-       redirect_to :controller => 'snapshots',:action => 'show', :id => @id
+       respond_to do |format|
+         format.html { redirect_to :controller => 'snapshots',:action => 'show', :id => @id }
+         format.js
+       end
   end
   def create
     @item = Item.new(params[:item])
-    #@snapshot = Snapshot.find(@temp.snapshot_id)
 
-    #@item  = @snapshot.items.build(params[:item])
     @snapshot = Snapshot.find(@item.snapshot_id)
+    @item.user_id = @snapshot.user_id
     @item.photo = @snapshot.photo
     if @item.save
-      #if params[:item][:photo].blank?
-      #flash[:success] = "Item created!"
-      #redirect_to @item
-      #else
-      render :action => 'crop'
-      #end
+    @item.update_attributes(params[:item])
+    respond_to do |format|
+      format.html { redirect_to @item }
+      format.js
+      end
+    #  #if params[:item][:photo].blank?
+    #  flash[:notice] = "Item created!"
+    #  redirect_to @item
+    #  #else
+    #  #render :action => 'crop'
+    #  #end
     else
-      flash[:success] = nil
-      render :action => "new"
+      respond_to do |format|
+        format.html {redirect_to root_path}
+        format.js {redirect_to snapshot_path(@snapshot)}
+      end
     end
   end
   def update
@@ -57,6 +74,11 @@ class ItemsController < ApplicationController
   else
     render :action => 'edit'
   end
-end
+  end
+
+  private
+  def authenticate
+     deny_access unless user_signed_in?
+  end
 
 end

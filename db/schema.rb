@@ -15,7 +15,7 @@ ActiveRecord::Schema.define(:version => 20110907183239) do
   create_table "items", :force => true do |t|
     t.string   "name"
     t.text     "description"
-    t.integer  "price"
+    t.decimal  "price",              :precision => 8, :scale => 2
     t.integer  "user_id"
     t.datetime "created_at"
     t.datetime "updated_at"

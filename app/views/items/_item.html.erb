@@ -1,7 +1,7 @@
-<tr>
-  <td class = "item_name"> <%= link_to item.name, item_path(item) %>  </td>
-  <td><%= link_to "Edit", edit_item_path(item) %> </td>
-  <td><%= link_to 'Destroy', item_path(item.id),
-  :confirm => 'Are you sure?',
-  :method => :delete %>  </td>
-</tr>
+  <div id = "item">
+      <div id= "item_pic"> <%= link_to image_tag(item.photo.url(:small)), item_path(item) %> </div>
+      <%= link_to item.name, item_path(item) %>                       </br>
+      <div id = "item_del"><%= link_to 'Destroy', item_path(item.id),
+              :confirm => "Are you sure?",
+    :method => :delete, :remote => true %> </div>
+  </div>

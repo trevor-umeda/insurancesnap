@@ -4,7 +4,7 @@ Insurance::Application.routes.draw do
   resources 'snapshots'
 
   resources 'items'
-
+   get 'items', :to => 'items#index', :as => :item_root
 
 
   devise_for :users do
