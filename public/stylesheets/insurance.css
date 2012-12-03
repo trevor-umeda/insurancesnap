@@ -139,3 +139,9 @@ table.items td.item_delete {
     padding-right: 1em;
     text-align: right;
 }
+
+#errors {
+    padding-top: 1em;
+    padding-bottom: 1em;
+    font-size: large;
+}

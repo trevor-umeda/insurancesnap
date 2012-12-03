@@ -3,9 +3,13 @@ source 'http://rubygems.org'
 gem 'rails', '3.0.9'
 gem "devise", "~> 1.4.4"
 gem "paperclip", "~> 2.4"
+gem 'will_paginate', '3.0.pre2'
+ gem "acts_as_list", "~> 0.1.4"
 group :test, :development do
-  gem "rspec-rails"
+  gem 'rspec-rails', '2.6.1'
+  gem 'webrat'
 end
+gem 'factory_girl_rails', :group => :test
 
 # Bundle edge Rails instead:
 # gem 'rails', :git => 'git://github.com/rails/rails.git'

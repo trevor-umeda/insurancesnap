@@ -1,6 +1,15 @@
 class ItemsController < ApplicationController
   before_filter :authenticate
   include ApplicationHelper
+
+  def sort
+    current_user.items.each do |item|
+      item.position = params[ 'user' ].index(item.id.to_s) + 1
+      item.save
+    end
+    render :nothing => true
+    end
+
   def index
     if params[:search]
       @items = Item.find_all_by_user_id(current_user.id, :conditions => ['name LIKE ?', "%#{params[:search]}%"])
@@ -18,10 +27,18 @@ class ItemsController < ApplicationController
     @user_items = current_user.items if user_signed_in?
     @item = Item.find(params[:id])
     @snapshot = Snapshot.find(@item.snapshot_id)
+    respond_to do |format|
+      format.html
+      format.xml {render :xml => @item}
+      end
 
   end
   def edit
       @item = Item.find(params[:id])
+    respond_to do |format|
+      format.html
+      format.xml {render :xml => @item}
+      end
   end
 
 
@@ -46,6 +63,7 @@ class ItemsController < ApplicationController
     respond_to do |format|
       format.html { redirect_to @item }
       format.js
+      format.xml {render :xml => @item}
       end
     #  #if params[:item][:photo].blank?
     #  flash[:notice] = "Item created!"
@@ -54,6 +72,8 @@ class ItemsController < ApplicationController
     #  #render :action => 'crop'
     #  #end
     else
+      @error = @item.errors[:name]
+      flash[:errors] = "Problems with your entry"
       respond_to do |format|
         format.html {redirect_to root_path}
         format.js {redirect_to snapshot_path(@snapshot)}

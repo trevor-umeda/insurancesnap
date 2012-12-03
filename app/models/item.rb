@@ -1,7 +1,6 @@
 class Item < ActiveRecord::Base
   belongs_to :snapshots
   belongs_to :users
-
   validates :name, :presence => true
   validates :description, :presence => true
   validates :price, :presence => true,

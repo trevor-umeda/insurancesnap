@@ -31,6 +31,11 @@ class SnapshotsController < ApplicationController
     @item.snapshot_id = @snapshot.id
     @item.photo = @snapshot.photo
      @items = @snapshot.items
+
+    respond_to do |format|
+      format.html
+      format.xml {render :xml => @snapshot}
+    end
   end
 
   private
